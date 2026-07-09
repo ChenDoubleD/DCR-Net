@@ -10,13 +10,12 @@ from __future__ import annotations
 import ctypes
 import os
 import time
-from typing import Sequence
+from collections.abc import Sequence
 
 # Avoid duplicated OpenMP runtime errors when third-party libraries are loaded.
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
 
 from ik_move_by_offset import ik_move_by_offset_rad_simple
-
 
 # -----------------------------------------------------------------------------
 # Robot and DLL configuration
@@ -110,7 +109,6 @@ class DeviceMessageC(ctypes.Structure):
 # -----------------------------------------------------------------------------
 def configure_robot_sdk() -> None:
     """Configure ctypes argument and return types for the robot SDK calls."""
-
     ROBOT_DLL.Set_Install_Pose.argtypes = (
         ctypes.c_int,
         ctypes.c_float,
@@ -134,7 +132,6 @@ def configure_robot_sdk() -> None:
 
 def initialize_arm(initial_joints: Sequence[float] = INITIAL_JOINTS) -> int:
     """Initialize the robot API, connect to the arm and move to the start pose."""
-
     ROBOT_DLL.RM_API_Init(API_VERSION, 0)
     configure_robot_sdk()
 
@@ -161,7 +158,6 @@ def initialize_arm(initial_joints: Sequence[float] = INITIAL_JOINTS) -> int:
 
 def apply_manual_offset() -> None:
     """Apply the configured Cartesian and rotation offset to the robot arm."""
-
     position_offset = [PX_OFFSET, PY_OFFSET, PZ_OFFSET]
 
     # The IK helper expects rotation input in the order [Ry, Rx, Rz].
@@ -175,7 +171,6 @@ def apply_manual_offset() -> None:
 
 def main() -> None:
     """Run the manual offset-control process."""
-
     initialize_arm()
     time.sleep(2.0)
 

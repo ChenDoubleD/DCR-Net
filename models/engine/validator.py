@@ -37,7 +37,12 @@ from models.nn.autobackend import AutoBackend
 from models.utils import LOGGER, RANK, TQDM, callbacks, colorstr, emojis
 from models.utils.checks import check_imgsz
 from models.utils.ops import Profile
-from models.utils.torch_utils import attempt_compile, select_device, smart_inference_mode, unwrap_model
+from models.utils.torch_utils import (
+    attempt_compile,
+    select_device,
+    smart_inference_mode,
+    unwrap_model,
+)
 
 
 class BaseValidator:
