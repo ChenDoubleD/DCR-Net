@@ -3,7 +3,14 @@
 from __future__ import annotations
 
 from models.cfg import TASK2DATA, TASK2METRIC, get_cfg, get_save_dir
-from models.utils import DEFAULT_CFG, DEFAULT_CFG_DICT, LOGGER, NUM_THREADS, checks, colorstr
+from models.utils import (
+    DEFAULT_CFG,
+    DEFAULT_CFG_DICT,
+    LOGGER,
+    NUM_THREADS,
+    checks,
+    colorstr,
+)
 
 
 def run_ray_tune(

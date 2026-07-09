@@ -392,7 +392,6 @@ Ultralytics includes an `Annotator` class for annotating various data types. It'
         ```python
         import cv2 as cv
         import numpy as np
-
         from ultralytics.utils.plotting import Annotator, colors
 
         names = {
@@ -434,7 +433,6 @@ Ultralytics includes an `Annotator` class for annotating various data types. It'
         ```python
         import cv2 as cv
         import numpy as np
-
         from ultralytics.utils.plotting import Annotator, colors
 
         obb_names = {10: "small vehicle"}
@@ -476,7 +474,6 @@ Also see the [`Annotator` Reference Page](../reference/utils/plotting.md/#ultral
     ```python
     import cv2
     import numpy as np
-
     from ultralytics import YOLO
     from ultralytics.solutions.solutions import SolutionAnnotator
     from ultralytics.utils.plotting import colors
@@ -589,7 +586,6 @@ Find additional details about the `sweep_annotator` method in our reference sect
 
         ```python
         import cv2
-
         from ultralytics import YOLO
         from ultralytics.solutions.solutions import SolutionAnnotator
         from ultralytics.utils.plotting import colors
@@ -628,7 +624,6 @@ Find additional details about the `sweep_annotator` method in our reference sect
 
         ```python
         import cv2
-
         from ultralytics import YOLO
         from ultralytics.solutions.solutions import SolutionAnnotator
         from ultralytics.utils.plotting import colors

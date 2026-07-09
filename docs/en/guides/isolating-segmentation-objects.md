@@ -25,28 +25,28 @@ After performing the [Segment Task](../tasks/segment.md), it's sometimes desirab
 
     ***
 
-2. Load a model and run `predict()` method on a source.
+2.  Load a model and run `predict()` method on a source.
 
-   ```python
-   from models import YOLO
+    ```python
+    from models import YOLO
 
-   # Load a model
-   model = YOLO("yolo26n-seg.pt")
+    # Load a model
+    model = YOLO("yolo26n-seg.pt")
 
-   # Run inference
-   results = model.predict()
-   ```
+    # Run inference
+    results = model.predict()
+    ```
 
     !!! question "No Prediction Arguments?"
 
-        Without specifying a source, the example images from the library will be used:
+         Without specifying a source, the example images from the library will be used:
 
-        ```
-        'ultralytics/assets/bus.jpg'
-        'ultralytics/assets/zidane.jpg'
-        ```
+         ```
+         'ultralytics/assets/bus.jpg'
+         'ultralytics/assets/zidane.jpg'
+         ```
 
-        This is helpful for rapid testing with the `predict()` method.
+         This is helpful for rapid testing with the `predict()` method.
 
     For additional information about Segmentation Models, visit the [Segment Task](../tasks/segment.md#models) page. To learn more about `predict()` method, see [Predict Mode](../modes/predict.md) section of the Documentation.
 
@@ -261,7 +261,6 @@ from pathlib import Path
 
 import cv2
 import numpy as np
-
 from ultralytics import YOLO
 
 m = YOLO("yolo26n-seg.pt")  # (4)!
