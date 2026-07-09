@@ -52,7 +52,11 @@ from models.nn.autobackend import AutoBackend
 from models.utils import DEFAULT_CFG, LOGGER, MACOS, WINDOWS, callbacks, colorstr, ops
 from models.utils.checks import check_imgsz, check_imshow
 from models.utils.files import increment_path
-from models.utils.torch_utils import attempt_compile, select_device, smart_inference_mode
+from models.utils.torch_utils import (
+    attempt_compile,
+    select_device,
+    smart_inference_mode,
+)
 
 STREAM_WARNING = """
 Inference results will accumulate in RAM unless `stream=True` is passed, which can cause out-of-memory errors for large

@@ -80,7 +80,12 @@ from models.data.dataset import YOLODataset
 from models.data.utils import check_cls_dataset, check_det_dataset
 from models.nn.autobackend import check_class_names, default_class_names
 from models.nn.modules import C2f, Classify, Detect, RTDETRDecoder
-from models.nn.tasks import ClassificationModel, DetectionModel, SegmentationModel, WorldModel
+from models.nn.tasks import (
+    ClassificationModel,
+    DetectionModel,
+    SegmentationModel,
+    WorldModel,
+)
 from models.utils import (
     ARM64,
     DEFAULT_CFG,
@@ -1204,7 +1209,9 @@ class Exporter:
         # Pin numpy to avoid coremltools errors with numpy>=2.4.0, must be separate
         check_requirements("numpy<=2.3.5")
 
-        from executorch.backends.xnnpack.partition.xnnpack_partitioner import XnnpackPartitioner
+        from executorch.backends.xnnpack.partition.xnnpack_partitioner import (
+            XnnpackPartitioner,
+        )
         from executorch.exir import to_edge_transform_and_lower
 
         file_directory = Path(str(self.file).replace(self.file.suffix, "_executorch_model"))

@@ -12,7 +12,14 @@ from typing import Any
 import numpy as np
 import torch
 
-from models.utils import LOGGER, DataExportMixin, SimpleClass, TryExcept, checks, plt_settings
+from models.utils import (
+    LOGGER,
+    DataExportMixin,
+    SimpleClass,
+    TryExcept,
+    checks,
+    plt_settings,
+)
 
 OKS_SIGMA = (
     np.array(

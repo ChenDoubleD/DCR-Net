@@ -61,7 +61,6 @@ keywords: Ultralytics YOLO26, speed estimation, object tracking, computer vision
 
         ```python
         import cv2
-
         from ultralytics import solutions
 
         cap = cv2.VideoCapture("path/to/video.mp4")
