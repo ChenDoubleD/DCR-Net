@@ -1,0 +1,8 @@
+train: F:\dataset\Docking\20251222\aug_tietu_guang_train+val\train  # train
+val: F:\dataset\Docking\20251222\aug_tietu_guang_train+val\val  # val
+test: F:\dataset\Docking\20251222\aug_tietu_guang_train+val\test  # test
+
+nc: 3
+
+# class names
+names: ['sign1', 'sign2', 'sign3']
