@@ -10,7 +10,13 @@ import cv2
 import numpy as np
 
 from models.utils import LOGGER, RANK, SETTINGS, TESTS_RUNNING, ops
-from models.utils.metrics import ClassifyMetrics, DetMetrics, OBBMetrics, PoseMetrics, SegmentMetrics
+from models.utils.metrics import (
+    ClassifyMetrics,
+    DetMetrics,
+    OBBMetrics,
+    PoseMetrics,
+    SegmentMetrics,
+)
 
 try:
     assert not TESTS_RUNNING  # do not log pytest

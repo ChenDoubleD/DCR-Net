@@ -5,20 +5,15 @@
 # 其余资源(pDll, nSocket, float_joint, POSE_c, DevMsg)从主程序(__main__)获取
 
 import ctypes
-import numpy as np
 import time
 
 
 def ik_move_by_offset_rad_simple(position, euler_rad):
-    """
-    输入:
-        position  : [dx, dy, dz] (m)
-        euler_rad : [dphi, dtheta, dpsi] (rad)
-    返回:
-        若逆解成功并执行，返回执行的关节角列表(6)；失败返回 None
+    """输入: position : [dx, dy, dz] (m) euler_rad : [dphi, dtheta, dpsi] (rad) 返回: 若逆解成功并执行，返回执行的关节角列表(6)；失败返回 None.
     """
     # —— 从主程序(__main__)拿到已连接好的句柄与结构类型 ——
     import __main__ as _m
+
     try:
         pDll = _m.pDll
         nSocket = _m.nSocket
@@ -44,12 +39,10 @@ def ik_move_by_offset_rad_simple(position, euler_rad):
     pDll.Forward_Kinematics.argtypes = (ctypes.c_float * 6,)
     pDll.Forward_Kinematics.restype = POSE_c
 
-    pDll.inverse_kinematics.argtypes = (ctypes.c_float * 6, ctypes.POINTER(POSE_c),
-                                        ctypes.c_float * 6, ctypes.c_uint8)
+    pDll.inverse_kinematics.argtypes = (ctypes.c_float * 6, ctypes.POINTER(POSE_c), ctypes.c_float * 6, ctypes.c_uint8)
     pDll.inverse_kinematics.restype = ctypes.c_int
 
-    pDll.Movej_Cmd.argtypes = (ctypes.c_int, ctypes.c_float * 6,
-                               ctypes.c_byte, ctypes.c_float, ctypes.c_bool)
+    pDll.Movej_Cmd.argtypes = (ctypes.c_int, ctypes.c_float * 6, ctypes.c_byte, ctypes.c_float, ctypes.c_bool)
     pDll.Movej_Cmd.restype = ctypes.c_int
 
     pDll.Set_Gripper_Pick_On.argtypes = (ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_bool)
@@ -62,10 +55,7 @@ def ik_move_by_offset_rad_simple(position, euler_rad):
     pose_dev = DevMsg()
     arm_err = ctypes.c_uint16(0)
     sys_err = ctypes.c_uint16(0)
-    pDll.Get_Current_Arm_State(nSocket, joint_now,
-                                     ctypes.byref(pose_dev),
-                                     ctypes.byref(arm_err),
-                                     ctypes.byref(sys_err))
+    pDll.Get_Current_Arm_State(nSocket, joint_now, ctypes.byref(pose_dev), ctypes.byref(arm_err), ctypes.byref(sys_err))
 
     # 2) 正解得到当前末端位姿（作为叠加基准；eul 按"弧度"使用）
     pose_base = pDll.Forward_Kinematics(joint_now)
@@ -82,7 +72,6 @@ def ik_move_by_offset_rad_simple(position, euler_rad):
     new_pose.eul.phi = pose_base.eul.phi + dphi
     new_pose.eul.theta = pose_base.eul.theta + dtheta
     new_pose.eul.psi = pose_base.eul.psi + dpsi
-
 
     # 4) 逆解（种子=当前关节角）
     q_out = float_joint()

@@ -137,7 +137,6 @@ while True:
     import ros_numpy
     import rospy
     from sensor_msgs.msg import Image
-
     from ultralytics import YOLO
 
     detection_model = YOLO("yolo26m.pt")
@@ -309,7 +308,6 @@ while True:
     import rospy
     from sensor_msgs.msg import Image
     from std_msgs.msg import String
-
     from ultralytics import YOLO
 
     rospy.init_node("ultralytics")
@@ -462,7 +460,6 @@ for index, class_id in enumerate(classes):
     import ros_numpy
     import rospy
     from sensor_msgs.msg import PointCloud2
-
     from ultralytics import YOLO
 
     rospy.init_node("ultralytics")

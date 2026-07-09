@@ -136,6 +136,7 @@ def thread_safe_predict(image_path):
     results = model.predict(image_path)
     return results
 
+
 # Now you can safely call this function from multiple threads
 ```
 
