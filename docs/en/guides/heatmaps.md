@@ -58,7 +58,6 @@ A heatmap generated with [Ultralytics YOLO26](https://github.com/ultralytics/ult
 
         ```python
         import cv2
-
         from ultralytics import solutions
 
         cap = cv2.VideoCapture("path/to/video.mp4")

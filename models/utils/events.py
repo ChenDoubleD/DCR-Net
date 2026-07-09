@@ -8,7 +8,16 @@ from threading import Thread
 from urllib.request import Request, urlopen
 
 from models import SETTINGS, __version__
-from models.utils import ARGV, ENVIRONMENT, GIT, IS_PIP_PACKAGE, ONLINE, PYTHON_VERSION, RANK, TESTS_RUNNING
+from models.utils import (
+    ARGV,
+    ENVIRONMENT,
+    GIT,
+    IS_PIP_PACKAGE,
+    ONLINE,
+    PYTHON_VERSION,
+    RANK,
+    TESTS_RUNNING,
+)
 from models.utils.downloads import GITHUB_ASSETS_NAMES
 from models.utils.torch_utils import get_cpu_info
 

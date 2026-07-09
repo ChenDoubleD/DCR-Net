@@ -11,7 +11,13 @@ import torch.nn.functional as F
 
 from models.utils.metrics import OKS_SIGMA, RLE_WEIGHT
 from models.utils.ops import crop_mask, xywh2xyxy, xyxy2xywh
-from models.utils.tal import RotatedTaskAlignedAssigner, TaskAlignedAssigner, dist2bbox, dist2rbox, make_anchors
+from models.utils.tal import (
+    RotatedTaskAlignedAssigner,
+    TaskAlignedAssigner,
+    dist2bbox,
+    dist2rbox,
+    make_anchors,
+)
 from models.utils.torch_utils import autocast
 
 from .metrics import bbox_iou, probiou
