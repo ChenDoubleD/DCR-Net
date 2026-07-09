@@ -44,8 +44,25 @@ import torch.cuda
 from models import YOLO, YOLOWorld
 from models.cfg import TASK2DATA, TASK2METRIC
 from models.engine.exporter import export_formats
-from models.utils import ARM64, ASSETS, ASSETS_URL, IS_JETSON, LINUX, LOGGER, MACOS, TQDM, WEIGHTS_DIR, YAML
-from models.utils.checks import IS_PYTHON_3_13, check_imgsz, check_requirements, check_yolo, is_rockchip
+from models.utils import (
+    ARM64,
+    ASSETS,
+    ASSETS_URL,
+    IS_JETSON,
+    LINUX,
+    LOGGER,
+    MACOS,
+    TQDM,
+    WEIGHTS_DIR,
+    YAML,
+)
+from models.utils.checks import (
+    IS_PYTHON_3_13,
+    check_imgsz,
+    check_requirements,
+    check_yolo,
+    is_rockchip,
+)
 from models.utils.downloads import safe_download
 from models.utils.files import file_size
 from models.utils.torch_utils import get_cpu_info, select_device

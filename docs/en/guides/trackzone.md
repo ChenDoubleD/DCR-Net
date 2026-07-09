@@ -58,7 +58,6 @@ TrackZone specializes in monitoring objects within designated areas of a frame i
 
         ```python
         import cv2
-
         from ultralytics import solutions
 
         cap = cv2.VideoCapture("path/to/video.mp4")

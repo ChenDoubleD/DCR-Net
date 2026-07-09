@@ -109,7 +109,10 @@ class ParkingPtsSelection:
 
     def upload_image(self) -> None:
         """Upload and display an image on the canvas, resizing it to fit within specified dimensions."""
-        from PIL import Image, ImageTk  # Scoped import because ImageTk requires tkinter package
+        from PIL import (  # Scoped import because ImageTk requires tkinter package
+            Image,
+            ImageTk,
+        )
 
         file = self.filedialog.askopenfilename(filetypes=[("Image Files", "*.png *.jpg *.jpeg")])
         if not file:
@@ -167,7 +170,9 @@ class ParkingPtsSelection:
         scale_w, scale_h = self.imgw / self.canvas.winfo_width(), self.imgh / self.canvas.winfo_height()
         data = [{"points": [(int(x * scale_w), int(y * scale_h)) for x, y in box]} for box in self.rg_data]
 
-        from io import StringIO  # Function level import, as it's only required to store coordinates
+        from io import (
+            StringIO,  # Function level import, as it's only required to store coordinates
+        )
 
         write_buffer = StringIO()
         json.dump(data, write_buffer, indent=4)

@@ -13,7 +13,15 @@ import torch
 from PIL import Image, ImageDraw, ImageFont
 from PIL import __version__ as pil_version
 
-from models.utils import IS_COLAB, IS_KAGGLE, LOGGER, TryExcept, ops, plt_settings, threaded
+from models.utils import (
+    IS_COLAB,
+    IS_KAGGLE,
+    LOGGER,
+    TryExcept,
+    ops,
+    plt_settings,
+    threaded,
+)
 from models.utils.checks import check_font, check_version, is_ascii
 from models.utils.files import increment_path
 
