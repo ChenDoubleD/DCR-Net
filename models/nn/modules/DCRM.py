@@ -1,6 +1,4 @@
-"""
-DCRM bottleneck module
-"""
+"""DCRM bottleneck module."""
 
 from __future__ import annotations
 
@@ -141,9 +139,7 @@ class DCRMBottleneck(nn.Module):
         )
 
         # Multi-scale depthwise branches with different dilation rates.
-        self.cau_branches = nn.ModuleList(
-            DepthwiseConv(expanded_channels, dilation=dilation) for dilation in dilations
-        )
+        self.cau_branches = nn.ModuleList(DepthwiseConv(expanded_channels, dilation=dilation) for dilation in dilations)
 
         # Simple channel interaction and lightweight attention.
         self.simple_gate = SimpleGate()

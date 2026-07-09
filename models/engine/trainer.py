@@ -43,7 +43,13 @@ from models.utils import (
     emojis,
 )
 from models.utils.autobatch import check_train_batch_size
-from models.utils.checks import check_amp, check_file, check_imgsz, check_model_file_from_stem, print_args
+from models.utils.checks import (
+    check_amp,
+    check_file,
+    check_imgsz,
+    check_model_file_from_stem,
+    print_args,
+)
 from models.utils.dist import ddp_cleanup, generate_ddp_command
 from models.utils.files import get_latest_run
 from models.utils.plotting import plot_results
