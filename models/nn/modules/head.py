@@ -15,9 +15,23 @@ from models.utils import NOT_MACOS14
 from models.utils.tal import dist2bbox, dist2rbox, make_anchors
 from models.utils.torch_utils import TORCH_1_11, fuse_conv_and_bn, smart_inference_mode
 
-from .block import DFL, SAVPE, BNContrastiveHead, ContrastiveHead, Proto, Proto26, RealNVP, Residual, SwiGLUFFN
+from .block import (
+    DFL,
+    SAVPE,
+    BNContrastiveHead,
+    ContrastiveHead,
+    Proto,
+    Proto26,
+    RealNVP,
+    Residual,
+    SwiGLUFFN,
+)
 from .conv import Conv, DWConv
-from .transformer import MLP, DeformableTransformerDecoder, DeformableTransformerDecoderLayer
+from .transformer import (
+    MLP,
+    DeformableTransformerDecoder,
+    DeformableTransformerDecoderLayer,
+)
 from .utils import bias_init_with_prob, linear_init
 
 __all__ = "OBB", "Classify", "Detect", "Pose", "RTDETRDecoder", "Segment", "YOLOEDetect", "YOLOESegment", "v10Detect"

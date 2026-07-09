@@ -258,7 +258,6 @@ There are 2 methods of using the Raspberry Pi Camera to run inference on YOLO26 
                 ```python
                 import cv2
                 from picamera2 import Picamera2
-
                 from ultralytics import YOLO
 
                 # Initialize the Picamera2
