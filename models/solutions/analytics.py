@@ -8,7 +8,10 @@ from typing import Any
 import cv2
 import numpy as np
 
-from models.solutions.solutions import BaseSolution, SolutionResults  # Import a parent class
+from models.solutions.solutions import (  # Import a parent class
+    BaseSolution,
+    SolutionResults,
+)
 from models.utils import plt_settings
 
 

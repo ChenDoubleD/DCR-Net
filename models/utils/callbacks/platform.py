@@ -9,7 +9,16 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from time import time
 
-from models.utils import ENVIRONMENT, GIT, LOGGER, PYTHON_VERSION, RANK, SETTINGS, TESTS_RUNNING, colorstr
+from models.utils import (
+    ENVIRONMENT,
+    GIT,
+    LOGGER,
+    PYTHON_VERSION,
+    RANK,
+    SETTINGS,
+    TESTS_RUNNING,
+    colorstr,
+)
 
 PREFIX = colorstr("Platform: ")
 
