@@ -12,19 +12,18 @@ import math
 import os
 import random
 import time
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Optional, Sequence, Tuple
 
 # Avoid duplicated OpenMP runtime errors when OpenCV/Ultralytics are loaded.
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
 
 import cv2
-from openpyxl import Workbook, load_workbook
-from models import YOLO
-
 from ik_move_by_offset import ik_move_by_offset_rad_simple
+from openpyxl import Workbook, load_workbook
 from vision import detect_pose_with_multiframe_fusion, initialize_camera
 
+from models import YOLO
 
 # -----------------------------------------------------------------------------
 # Experiment configuration
@@ -140,7 +139,6 @@ class DeviceMessageC(ctypes.Structure):
 # -----------------------------------------------------------------------------
 def configure_robot_sdk() -> None:
     """Configure ctypes argument and return types for the robot SDK calls."""
-
     ROBOT_DLL.Set_Install_Pose.argtypes = (
         ctypes.c_int,
         ctypes.c_float,
@@ -162,9 +160,8 @@ def configure_robot_sdk() -> None:
     ROBOT_DLL.Movej_Cmd.restype = ctypes.c_int
 
 
-def initialize_arm(initial_joints: Sequence[float] = INITIAL_JOINTS) -> Tuple[int, FloatJoint6]:
+def initialize_arm(initial_joints: Sequence[float] = INITIAL_JOINTS) -> tuple[int, FloatJoint6]:
     """Initialize the robot API, connect to the arm and move to the start pose."""
-
     ROBOT_DLL.RM_API_Init(API_VERSION, 0)
     configure_robot_sdk()
 
@@ -191,7 +188,6 @@ def initialize_arm(initial_joints: Sequence[float] = INITIAL_JOINTS) -> Tuple[in
 
 def move_to_initial_pose(socket_id: int, joint_target: FloatJoint6) -> None:
     """Move the robot arm back to the predefined initial joint pose."""
-
     ROBOT_DLL.Movej_Cmd(
         socket_id,
         joint_target,
@@ -215,7 +211,6 @@ def compute_axis_value(position_m: Sequence[float], rotation_rad: Sequence[float
     Returns:
         Translation value in millimeters or rotation value in degrees.
     """
-
     if axis == "Px":
         return (-position_m[1] - 0.010) * 1000.0
     if axis == "Py":
@@ -232,7 +227,7 @@ def compute_axis_value(position_m: Sequence[float], rotation_rad: Sequence[float
     raise ValueError(f"Unsupported axis: {axis}")
 
 
-def generate_random_offset(axis: str) -> Tuple[float, list[float], list[float]]:
+def generate_random_offset(axis: str) -> tuple[float, list[float], list[float]]:
     """Generate one random motion command for the selected axis.
 
     Returns:
@@ -240,7 +235,6 @@ def generate_random_offset(axis: str) -> Tuple[float, list[float], list[float]]:
         offset_position: Cartesian offset [Px, Py, Pz] in meters.
         offset_rotation: Rotation offset in the IK order [Ry, Rx, Rz], in radians.
     """
-
     offset_position = [0.0, 0.0, 0.0]
     offset_rotation = [0.0, 0.0, 0.0]
 
@@ -266,7 +260,6 @@ def generate_random_offset(axis: str) -> Tuple[float, list[float], list[float]]:
 # -----------------------------------------------------------------------------
 def load_or_create_workbook(path: Path) -> Workbook:
     """Load an Excel workbook if it exists; otherwise create a new one."""
-
     if path.exists():
         return load_workbook(path)
 
@@ -278,7 +271,6 @@ def load_or_create_workbook(path: Path) -> Workbook:
 
 def create_sheet_if_missing(workbook: Workbook, sheet_name: str, baseline_value: float):
     """Create an axis sheet and write the header/baseline row if it is missing."""
-
     if sheet_name in workbook.sheetnames:
         return workbook[sheet_name]
 
@@ -305,11 +297,10 @@ def append_experiment_row(
     sheet_name: str,
     trial_index: int,
     move_value: float,
-    measured_value: Optional[float],
-    error_value: Optional[float],
+    measured_value: float | None,
+    error_value: float | None,
 ) -> None:
     """Append one experiment result row into the target worksheet."""
-
     workbook = load_or_create_workbook(EXCEL_PATH)
     worksheet = create_sheet_if_missing(workbook, sheet_name, BASELINES.get(sheet_name, 0.0))
 
@@ -348,7 +339,6 @@ def run_single_experiment(
     Returns:
         True if the vision measurement succeeds; otherwise False.
     """
-
     # 1. Return the arm to the initial pose.
     move_to_initial_pose(socket_id, joint_target)
     time.sleep(1.5)
@@ -387,10 +377,7 @@ def run_single_experiment(
         ideal_value = baseline - move_display
         error_value = measured_value - ideal_value
 
-        print(
-            f"  Measured: {measured_value:.3f} {unit}, "
-            f"Ideal: {ideal_value:.3f}, Error: {error_value:.3f}"
-        )
+        print(f"  Measured: {measured_value:.3f} {unit}, Ideal: {ideal_value:.3f}, Error: {error_value:.3f}")
 
     # 5. Save the experiment result.
     append_experiment_row(axis, trial_index, move_display, measured_value, error_value)
@@ -402,7 +389,6 @@ def run_single_experiment(
 # -----------------------------------------------------------------------------
 def main() -> None:
     """Run all configured pose accuracy experiments."""
-
     pipeline = None
     total_success = 0
     total_trials = len(AXES) * EXPERIMENTS_PER_AXIS

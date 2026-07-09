@@ -85,16 +85,16 @@ project_root/
 
 Main files:
 
-| File | Description |
-| --- | --- |
-| `dcrm_bottleneck_clean.py` | Cleaned implementation of the DCR/DCRM bottleneck module with English comments and backward-compatible class naming. |
-| `train.py` | YOLO-based training entry script for the three-sign detection dataset. |
-| `val.py` | YOLO-based validation/testing script for evaluating trained weights. |
-| `robot_arm_offset_control.py` | Manual robot-arm initialization and Cartesian/RPY offset control script. |
-| `robot_arm_pose_accuracy_experiment.py` | Multi-axis randomized pose accuracy experiment script with visual detection and Excel logging. |
-| `vision.py` | External vision module used for camera initialization and multi-frame pose fusion. |
-| `ik_move_by_offset.py` | External inverse-kinematics helper used for moving the robot arm by offset. |
-| `RM_Base.dll` | Robot SDK dynamic library required by the robot control scripts. |
+| File                                    | Description                                                                                                          |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `dcrm_bottleneck_clean.py`              | Cleaned implementation of the DCR/DCRM bottleneck module with English comments and backward-compatible class naming. |
+| `train.py`                              | YOLO-based training entry script for the three-sign detection dataset.                                               |
+| `val.py`                                | YOLO-based validation/testing script for evaluating trained weights.                                                 |
+| `robot_arm_offset_control.py`           | Manual robot-arm initialization and Cartesian/RPY offset control script.                                             |
+| `robot_arm_pose_accuracy_experiment.py` | Multi-axis randomized pose accuracy experiment script with visual detection and Excel logging.                       |
+| `vision.py`                             | External vision module used for camera initialization and multi-frame pose fusion.                                   |
+| `ik_move_by_offset.py`                  | External inverse-kinematics helper used for moving the robot arm by offset.                                          |
+| `RM_Base.dll`                           | Robot SDK dynamic library required by the robot control scripts.                                                     |
 
 ---
 
@@ -173,15 +173,15 @@ The training script is `train.py`.
 Default training configuration:
 
 ```python
-model = YOLO(model=r'.\models\cfg\models\11\yolo11.yaml', task='detect')
+model = YOLO(model=r".\models\cfg\models\11\yolo11.yaml", task="detect")
 model.train(
-    data=r'.\Grasp-3signs.yaml',
+    data=r".\Grasp-3signs.yaml",
     imgsz=640,
     epochs=300,
     batch=8,
     workers=0,
     device=0,
-    optimizer='SGD',
+    optimizer="SGD",
     close_mosaic=10,
     resume=False,
     single_cls=False,
@@ -199,23 +199,23 @@ python train.py
 Before training, check the following paths:
 
 ```python
-model = YOLO(model=r'.\models\cfg\models\11\yolo11.yaml', task='detect')
-data = r'.\Grasp-3signs.yaml'
+model = YOLO(model=r".\models\cfg\models\11\yolo11.yaml", task="detect")
+data = r".\Grasp-3signs.yaml"
 ```
 
 Modify them according to your local project structure.
 
 Important parameters:
 
-| Parameter | Default value | Description |
-| --- | --- | --- |
-| `imgsz` | `640` | Input image size. |
-| `epochs` | `300` | Number of training epochs. |
-| `batch` | `8` | Training batch size. |
-| `device` | `0` | GPU device ID. Use `cpu` if no GPU is available. |
-| `optimizer` | `SGD` | Optimizer used for training. |
-| `close_mosaic` | `10` | Disable mosaic augmentation during the last 10 epochs. |
-| `amp` | `False` | Automatic mixed precision is disabled by default. |
+| Parameter      | Default value | Description                                            |
+| -------------- | ------------- | ------------------------------------------------------ |
+| `imgsz`        | `640`         | Input image size.                                      |
+| `epochs`       | `300`         | Number of training epochs.                             |
+| `batch`        | `8`           | Training batch size.                                   |
+| `device`       | `0`           | GPU device ID. Use `cpu` if no GPU is available.       |
+| `optimizer`    | `SGD`         | Optimizer used for training.                           |
+| `close_mosaic` | `10`          | Disable mosaic augmentation during the last 10 epochs. |
+| `amp`          | `False`       | Automatic mixed precision is disabled by default.      |
 
 ---
 
@@ -226,14 +226,14 @@ The validation script is `val.py`.
 Default validation configuration:
 
 ```python
-model = YOLO(r'.\runs\detect/runs/train\Docking20251222-3signs\rtdetrl-tietu+guang\weights\last.pt')
+model = YOLO(r".\runs\detect/runs/train\Docking20251222-3signs\rtdetrl-tietu+guang\weights\last.pt")
 model.val(
-    data=r'./data_process/Docking20251222-3signs.yaml',
+    data=r"./data_process/Docking20251222-3signs.yaml",
     imgsz=640,
     batch=16,
-    split='test',
-    project='runs/val/Docking20251222-3signs',
-    name='rtdetrl-tietu+guang-last',
+    split="test",
+    project="runs/val/Docking20251222-3signs",
+    name="rtdetrl-tietu+guang-last",
     workers=0,
     device=0,
 )
@@ -248,8 +248,8 @@ python val.py
 Before validation, update the following paths:
 
 ```python
-weights_path = r'.\runs\detect/runs/train\Docking20251222-3signs\rtdetrl-tietu+guang\weights\last.pt'
-data_yaml = r'./data_process/Docking20251222-3signs.yaml'
+weights_path = r".\runs\detect/runs/train\Docking20251222-3signs\rtdetrl-tietu+guang\weights\last.pt"
+data_yaml = r"./data_process/Docking20251222-3signs.yaml"
 ```
 
 The default script evaluates the `test` split. Change `split='val'` if you want to evaluate the validation set instead.
@@ -270,7 +270,7 @@ Main functions:
 Key configuration items:
 
 ```python
-ROBOT_IP = '192.168.1.100'
+ROBOT_IP = "192.168.1.100"
 ROBOT_PORT = 8080
 INITIAL_JOINTS = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 
@@ -323,12 +323,12 @@ Main workflow:
 Key configuration items:
 
 ```python
-AXES = ['Py', 'Rx', 'Ry']
+AXES = ["Py", "Rx", "Ry"]
 EXPERIMENTS_PER_AXIS = 20
 TRANSLATION_RANGE_M = (-0.03, 0.05)
 ROTATION_RANGE_RAD = (-10.0 * math.pi / 180.0, 10.0 * math.pi / 180.0)
-EXCEL_PATH = Path('DispAM_10.xlsx')
-MODEL_PATH = Path('.../weights/best.pt')
+EXCEL_PATH = Path("DispAM_10.xlsx")
+MODEL_PATH = Path(".../weights/best.pt")
 CAMERA_INDEX = 0
 ```
 
@@ -336,12 +336,12 @@ Baseline values:
 
 ```python
 BASELINES = {
-    'Px': -1.992,
-    'Py': 0.015,
-    'Pz': -41.8,
-    'Rx': 1.052,
-    'Ry': -0.785,
-    'Rz': -0.034,
+    "Px": -1.992,
+    "Py": 0.015,
+    "Pz": -41.8,
+    "Rx": 1.052,
+    "Ry": -0.785,
+    "Rz": -0.034,
 }
 ```
 
@@ -366,12 +366,12 @@ DispAM_10.xlsx
 
 The Excel workbook contains one sheet for each tested axis. Each sheet records:
 
-| Column | Meaning |
-| --- | --- |
-| `Trial` | Experiment index. |
-| `Move` | Commanded movement value. |
-| Axis name | Measured visual pose value. |
-| `dAxis` | Error between measured value and ideal value. |
+| Column    | Meaning                                       |
+| --------- | --------------------------------------------- |
+| `Trial`   | Experiment index.                             |
+| `Move`    | Commanded movement value.                     |
+| Axis name | Measured visual pose value.                   |
+| `dAxis`   | Error between measured value and ideal value. |
 
 ---
 
@@ -453,13 +453,13 @@ Update the YOLO weight path in `val.py` or `robot_arm_pose_accuracy_experiment.p
 If no GPU is available, change:
 
 ```python
-device=0
+device = 0
 ```
 
 to:
 
 ```python
-device='cpu'
+device = "cpu"
 ```
 
 ### 5. Camera initialization fails
